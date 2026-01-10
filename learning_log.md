@@ -51,3 +51,11 @@
 - Understood why return must be outside loops
 - Built real-world list processing logic
 
+## Latest Update
+- Consolidated loops, functions, try/except, continue
+- Built real-world batch validation logic
+- Implemented pipeline decision logic with thresholds
+- Practiced debugger-style tracing of code execution
+- Ready to start dictionaries (records & structured data)
+
+
