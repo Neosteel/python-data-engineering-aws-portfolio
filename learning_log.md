@@ -46,3 +46,8 @@
 - Ready to start Python lists (coding)
 
 
+- Refactored batch-cleaning logic into a reusable function
+- Learned correct placement of return statements
+- Understood why return must be outside loops
+- Built real-world list processing logic
+
