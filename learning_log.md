@@ -58,4 +58,10 @@
 - Practiced debugger-style tracing of code execution
 - Ready to start dictionaries (records & structured data)
 
+Factorial (iterative, accumulator pattern)
 
+Palindrome (reverse + compare, index logic)
+
+First non-repeating character (nested loops, counting logic)
+
+Reverse a number ( % 10, // 10, accumulator)
