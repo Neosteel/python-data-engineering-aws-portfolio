@@ -65,3 +65,31 @@ Palindrome (reverse + compare, index logic)
 First non-repeating character (nested loops, counting logic)
 
 Reverse a number ( % 10, // 10, accumulator)
+
+Add this (copy/paste):
+
+CSV Step 1: Created raw_sales.csv and read it using csv.DictReader
+
+Understood: CSV → list of dicts, each loop variable r is one row dict
+
+Step 2: Inspected real data problems: empty strings, non-numeric values, missing email
+
+Step 3: Built cleaning function with:
+
+validation first (isdigit, missing email)
+
+continue to skip invalid rows
+
+normalization: convert numeric strings to int
+
+counted invalid rows (got invalid = 3, clean rows = 3)
+
+Learned CSV writing concepts:
+
+DictWriter(fieldnames=...) defines schema
+
+missing key → blank cell
+
+extra key → crash (schema enforcement)
+
+“silent ignore” can cause data corruption
