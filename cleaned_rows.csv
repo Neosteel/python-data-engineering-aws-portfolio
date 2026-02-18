@@ -1,0 +1,4 @@
+order_id,customer,product,quantity,price,email
+1001,Alice,Laptop,1,1200,alice@gmail.com
+1002,Bob,Mouse,2,25,bob@gmail.com
+1005,Eva,Laptop,1,1200,eva@gmail.com

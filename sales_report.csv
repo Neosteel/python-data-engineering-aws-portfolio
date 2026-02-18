@@ -1,0 +1,3 @@
+order_id,customer,product,quantity,price,date,revenue
+1001,Alice,Laptop,1,1200,2026-02-10,1200
+1002,Bob,Mouse,2,25,2026-02-11,50

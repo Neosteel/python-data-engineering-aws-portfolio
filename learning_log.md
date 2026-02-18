@@ -92,4 +92,175 @@ missing key → blank cell
 
 extra key → crash (schema enforcement)
 
-“silent ignore” can cause data corruption
+“silent ignore” can cause data corruption\
+
+
+
+date: feb 17 2026
+
+🔄 Latest Session Update — Datetime + Reporting Pipeline
+CSV + Datetime Integration (Major Milestone)
+
+Step 1 — Structured CSV Processing
+
+Read sales_with_data.csv using csv.DictReader
+
+Understood difference between:
+
+Raw text (f.read())
+
+Structured rows (list of dictionaries)
+
+Learned that CSV values are always strings
+
+Practiced accessing row fields using r["column_name"]
+
+Step 2 — Datetime Fundamentals
+
+Learned datetime.strptime() (string → datetime object)
+
+Understood difference between:
+
+strptime (parse string)
+
+strftime (format datetime to string)
+
+Learned .weekday() and weekday numbering (Mon=0, Sun=6)
+
+Practiced:
+
+Date comparison (>=, <=)
+
+Date subtraction using timedelta(days=n)
+
+Difference between rolling window vs calendar month
+
+Step 3 — Rolling Window Revenue (Last 30 Days)
+
+Implemented:
+
+cutoff = today - timedelta(days=30)
+
+Filtered rows using:
+
+sale_date >= cutoff
+
+Learned accumulator pattern correctly:
+
+Initialize total BEFORE loop
+
+Update inside loop
+
+Built working revenue calculation for last 30 days
+
+Step 4 — Previous Calendar Month Logic (Advanced Date Handling)
+
+Understood difference:
+
+Last 30 days ≠ Previous calendar month
+
+Implemented automatic month boundary detection:
+
+first_day_of_month = today.replace(day=1)
+
+previous_month_end = first_day_of_month - timedelta(days=1)
+
+previous_month_start = previous_month_end.replace(day=1)
+
+Learned inclusive range filtering:
+
+start <= sale_date <= end
+
+Successfully computed February revenue (1250)
+
+Step 5 — Report Generation (Professional Output)
+
+Created derived column: revenue
+
+Built filtered dataset report_rows
+
+Used csv.DictWriter to generate:
+
+sales_report.csv
+
+Learned:
+
+"w" mode auto-creates file
+
+writeheader() required
+
+Fieldnames define schema
+
+Successfully exported structured monthly report
+
+Core Concepts Reinforced
+
+Accumulator pattern (never reset inside loop)
+
+Date range filtering logic
+
+Data pipeline structure:
+
+Ingest → Transform → Filter → Aggregate → Output
+
+Importance of schema enforcement in CSV writing
+
+Why month boundaries must be computed, not hardcoded
+
+Handling leap years automatically
+
+Architectural Thinking Gained
+
+Difference between:
+
+Rolling window analytics
+
+Calendar-based reporting (finance logic)
+
+Understood how real systems compute:
+
+Monthly reports
+
+Revenue dashboards
+
+Time-based KPIs
+
+Refactoring Phase (Started)
+
+Introduced function-based pipeline structure:
+
+load_sales()
+
+prev_month_range()
+
+build_prev_month_report_rows()
+
+write_report()
+
+Introduced main() execution pattern
+
+Began moving toward reusable, production-style code
+
+Status Now
+
+Comfortable with CSV ingestion
+
+Comfortable with datetime arithmetic
+
+Able to build filtered reporting pipelines
+
+Ready to:
+
+Parameterize reports (CLI arguments)
+
+Add analytics (Top N products/customers)
+
+Move toward automation-ready workflows
+
+Tomorrow Focus:
+
+Finalize function-based refactor
+
+Add parameter support (dynamic month selection)
+
+Begin automation design thinking

@@ -88,6 +88,9 @@ print(n.isnumeric())
 
 
 #  conditionals 
+
+# if 
+
 x = 11
 
 if(x == 10 ):
@@ -100,5 +103,8 @@ elif(x>100):
         ("greater than 200")
 else:
     print("x is not 10")
+
+
+# iterations loops 
 
 
