@@ -264,3 +264,42 @@ Finalize function-based refactor
 Add parameter support (dynamic month selection)
 
 Begin automation design thinking
+
+## Latest Update – CSV Pipeline & CLI Tool
+
+### Data Pipeline Built
+Implemented a complete structured Python data pipeline:
+
+sales_with_data.csv
+↓
+convert_csv_to_list()
+↓
+previous_month_range()
+↓
+build_prev_month_report()
+↓
+write_report()
+↓
+sales_report.csv
+
+### Key Concepts Learned
+
+- Reading CSV files using `csv.DictReader`
+- Converting CSV rows into `list[dict]`
+- Date handling using `datetime` and `timedelta`
+- Calculating previous calendar month range dynamically
+- Filtering rows using datetime comparisons
+- Computing derived values (revenue = price × quantity)
+- Writing CSV reports using `csv.DictWriter`
+
+### Code Architecture Improvements
+
+Refactored script into reusable functions:
+
+- `convert_csv_to_list()`
+- `previous_month_range()`
+- `build_prev_month_report()`
+- `write_report()`
+- `main()`
+
+Learned professional Python script structure:
