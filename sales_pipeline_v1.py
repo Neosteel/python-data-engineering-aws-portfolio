@@ -51,9 +51,42 @@ def build_prev_month_report(sales_data:list[dict],start:datetime, end : datetime
     return report_rows, total
 
 
+def revenue_per_product(rows: list[dict]) -> dict[str, int]:
+    revenue_map = {}
 
+    for r in rows:
+        product = r["product"]
+        revenue = r["revenue"]
 
+        if product not in revenue_map:
+            revenue_map[product] = 0
 
+        revenue_map[product] += revenue
+
+    return revenue_map
+
+def top_products(product_revenue: dict[str, int]) -> list[tuple[str, int]]:
+    sorted_products = sorted(
+        product_revenue.items(),
+        key=lambda x: x[1],
+        reverse=True
+    )
+
+    return sorted_products
+
+def revenue_per_customer(rows: list[dict]) -> dict[str, int]:
+    revenue_map = {}
+
+    for r in rows:
+        customer = r["customer"]
+        revenue = r["revenue"]
+
+        if customer not in revenue_map:
+            revenue_map[customer] = 0
+
+        revenue_map[customer] += revenue
+
+    return revenue_map
 
 def write_report(filename: str, report_rows: list[dict]) -> None:
     fieldnames = ["order_id", "customer", "product", "quantity", "price", "date", "revenue"]
@@ -69,8 +102,17 @@ def main(input_file: str, output_file: str) -> None:
     # datetime.strptime("2026-03-20", "%Y-%m-%d")
     start, end = previous_month_range(today)
     print("Previous month range:", start, end)
+
     sales = convert_csv_to_list(input_file)
     report_rows, total = build_prev_month_report(sales, start, end)
+
+    product_revenue = revenue_per_product(report_rows)
+    print("Revenue per product:", product_revenue)
+    sorted_products = top_products(product_revenue)
+    print("Top products:", sorted_products)
+
+    top_product = sorted_products[0]
+    print("Top product:", top_product)
 
     write_report(output_file, report_rows)
 
