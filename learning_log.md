@@ -233,7 +233,7 @@ load_sales()
 
 prev_month_range()
 
-build_prev_month_report_rows()
+build_report_for_range_rows()
 
 write_report()
 
@@ -276,7 +276,7 @@ convert_csv_to_list()
 ↓
 previous_month_range()
 ↓
-build_prev_month_report()
+build_report_for_range()
 ↓
 write_report()
 ↓
@@ -298,7 +298,7 @@ Refactored script into reusable functions:
 
 - `convert_csv_to_list()`
 - `previous_month_range()`
-- `build_prev_month_report()`
+- `build_report_for_range()`
 - `write_report()`
 - `main()`
 

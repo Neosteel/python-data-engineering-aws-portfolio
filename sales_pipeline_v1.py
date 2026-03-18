@@ -13,7 +13,7 @@ def convert_csv_to_list(filename : str  ) -> list[dict]:
     return sales_data   
 
 
-sales = convert_csv_to_list("sales_with_data.csv")
+
 
 
 
@@ -32,23 +32,33 @@ def previous_month_range(today : datetime) -> tuple[datetime, datetime]:
 # print(start, end)
 
 
-def build_prev_month_report(sales_data:list[dict],start:datetime, end : datetime ) -> tuple[list[dict], int] : 
+def build_report_for_range(sales_data:list[dict],start:datetime, end : datetime ) -> tuple[list[dict], int, int] : 
     total = 0 
     report_rows = []
-
+    invalid_count = 0
     for r in sales_data:
-        sale_date = datetime.strptime(r["date"], "%Y-%m-%d")
+        try:
+            sale_date = datetime.strptime(r["date"], "%Y-%m-%d")
+        except:
+            invalid_count += 1
+            continue
 
-
+    
         if start <= sale_date <= end:
-            revenue = int(r["quantity"]) * int(r["price"])
+            try:
+                quantity = int(r["quantity"])
+                price = int(r["price"])
+            except:
+                invalid_count += 1
+                continue
+            revenue = quantity * price
             out = dict(r)          # copy
             out["revenue"] = revenue
 
             report_rows.append(out)
             total += revenue
 
-    return report_rows, total
+    return report_rows, total , invalid_count
 
 
 def revenue_per_product(rows: list[dict]) -> dict[str, int]:
@@ -74,6 +84,17 @@ def top_products(product_revenue: dict[str, int]) -> list[tuple[str, int]]:
 
     return sorted_products
 
+def last_30_days_range(today:datetime)->tuple[datetime,datetime]:
+    today = today.replace(hour=0,minute=0,second=0,microsecond=0)
+    start = today - timedelta(days = 30)
+    return start , today
+
+
+
+
+
+
+
 def revenue_per_customer(rows: list[dict]) -> dict[str, int]:
     revenue_map = {}
 
@@ -87,6 +108,13 @@ def revenue_per_customer(rows: list[dict]) -> dict[str, int]:
         revenue_map[customer] += revenue
 
     return revenue_map
+def top_customers(customer_revenue: dict[str, int]) -> list[tuple[str, int]]:
+    sorted_customers = sorted(
+        customer_revenue.items(),
+        key=lambda x: x[1],
+        reverse=True
+    )
+    return sorted_customers
 
 def write_report(filename: str, report_rows: list[dict]) -> None:
     fieldnames = ["order_id", "customer", "product", "quantity", "price", "date", "revenue"]
@@ -97,33 +125,60 @@ def write_report(filename: str, report_rows: list[dict]) -> None:
         writer.writerows(report_rows)
 
 
-def main(input_file: str, output_file: str) -> None:
+def main(input_file: str, output_file: str, mode : str) -> None:
     today = datetime.now()
     # datetime.strptime("2026-03-20", "%Y-%m-%d")
-    start, end = previous_month_range(today)
-    print("Previous month range:", start, end)
+    print("Mode:", mode)
 
+    if mode == "prev_month":
+        start, end = previous_month_range(today)
+    elif mode == "last_30_days_range":
+        start,end = last_30_days_range(today)
+    else:
+        print("invalid mode")
+        sys.exit(1)
+
+
+
+    print("Today:", today)
+    print("Date range:", start, end)
     sales = convert_csv_to_list(input_file)
-    report_rows, total = build_prev_month_report(sales, start, end)
+    report_rows, total, invalid_count = build_report_for_range(sales, start, end)
 
     product_revenue = revenue_per_product(report_rows)
     print("Revenue per product:", product_revenue)
     sorted_products = top_products(product_revenue)
     print("Top products:", sorted_products)
 
-    top_product = sorted_products[0]
-    print("Top product:", top_product)
+    if sorted_products:
+        top_product = sorted_products[0]
+        print("Top product:", top_product)
+    else:
+        print("Top product: No data found for previous month")
+    customer_revenue = revenue_per_customer(report_rows)
+    print("Revenue per customer:", customer_revenue)
+
+    sorted_customers = top_customers(customer_revenue)
+    print("Top customers:", sorted_customers)
+
+    if sorted_customers:
+        top_customer = sorted_customers[0]
+        print("Top customer:", top_customer)
+    else:
+        print("Top customer: No data found for previous month")
 
     write_report(output_file, report_rows)
 
     print("Total revenue:", total)
+    print("invalid_rows : ", invalid_count)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python3 sales_pipeline_v1.py <input_file> <output_file>")
+    if len(sys.argv) != 4:
+        print("Usage: python3 sales_pipeline_v1.py <input_file> <output_file> <mode> ")
         sys.exit(1)
     else:
         input_file = sys.argv[1]
         output_file = sys.argv[2]
-        main(input_file, output_file)
+        mode = sys.argv[3]
+        main(input_file, output_file, mode)
