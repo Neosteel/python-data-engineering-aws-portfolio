@@ -303,3 +303,142 @@ Refactored script into reusable functions:
 - `main()`
 
 Learned professional Python script structure:
+
+## Latest Update (CSV + Datetime Pipeline - Advanced)
+
+- Built dynamic CSV reporting pipeline using CLI arguments (`sys.argv`)
+- Implemented multiple reporting modes:
+  - `prev_month`
+  - `last_30_days`
+- Learned how to design flexible pipelines using mode-based logic
+
+- Created reusable function:
+  - `build_report_for_range` (generic date-range processing)
+
+- Implemented robust error handling:
+  - Used `try/except` for date parsing
+  - Used `try/except` for numeric conversion (quantity, price)
+  - Skipped invalid rows safely instead of crashing
+
+- Added data quality tracking:
+  - `invalid_count` to track bad rows
+  - Printed invalid row summary in output
+
+- Learned real-world pipeline design concepts:
+  - Happy path vs difficult path handling
+  - Defensive programming for messy data
+  - Importance of not breaking pipeline due to bad records
+
+- Improved CLI design:
+  - Mode-based execution
+  - Input/output file arguments
+  - Safe exit using `sys.exit(1)`
+
+- Practiced real-world testing:
+  - Injected invalid data into CSV
+  - Verified pipeline robustness
+
+## Current Status
+- Strong foundation in:
+  - CSV processing
+  - datetime handling
+  - function-based pipelines
+  - CLI tools
+  - error handling
+
+## Next Topics
+- argparse (professional CLI handling)
+- Data validation patterns (advanced)
+- Introduction to pandas (structured data processing)
+- SQL integration with Python
+
+
+# Learning Log
+
+## Current Project
+Sales Reporting Tool (CLI + Data Pipeline)
+
+## Current File
+sales_reporting_tool.py
+
+## Dataset
+sales_project_data.csv
+
+## What I completed
+- Built CSV pipeline using Python
+- Added argparse CLI
+- Handled invalid data using try/except
+- Started learning pandas basics
+- Created numeric cleaning using pd.to_numeric
+
+## Current Topic
+Pandas fundamentals (DataFrame, cleaning, filtering)
+
+## Next Step
+- Build project from scratch using new dataset
+- Start with loading CSV and basic structure
+
+## Key Learnings
+- DataFrame is like a table (Excel in Python)
+- df["col"] vs df[["col1","col2"]]
+- errors="coerce" converts bad values to NaN
+
+## Questions / Confusions
+- pandas syntax still confusing
+- need more clarity on filtering and transformations
+
+## Latest Session
+- Created project folder structure for sales_reporting_tool
+- Added input/sales_project_data.csv
+- Built load_sales_data(file_path) using csv.DictReader
+- Confirmed CSV loads as a list of dictionaries
+- Built clean_sales_data(rows)
+- Converted:
+  - order_id -> int
+  - quantity -> int
+  - price -> float
+  - date -> datetime using datetime.strptime(...)
+- Used try/except ValueError to skip bad rows instead of crashing
+- Verified invalid row count = 2
+- Understood that try/except here mainly protects conversion errors
+- Next step: write filter_sales_data(rows, mode, reference_date)
+
+## Current File
+sales_reporting_tool.py
+
+## Next Topic
+Build filter_sales_data(rows, mode, reference_date)
+
+## Resume From
+Start by writing filter_sales_data() for:
+- prev_month
+- last_30_days
+Then test filtered output before moving to revenue calculations.
+
+## Latest Session
+- Created sales_reporting_tool project folder with input and output folders
+- Added sales_project_data.csv into input/
+- Built load_sales_data(file_path) using csv.DictReader
+- Confirmed CSV loads as list of dictionaries
+- Built clean_sales_data(rows)
+- Converted:
+  - order_id -> int
+  - quantity -> int
+  - price -> float
+  - date -> datetime using datetime.strptime()
+- Used try/except ValueError to skip bad rows without crashing
+- Verified invalid row count = 2
+- Pushed current sales_reporting_tool progress to GitHub
+- Next step is to write filter_sales_data(rows, mode, reference_date)
+
+## Current File
+sales_reporting_tool/sales_reporting_tool.py
+
+## Next Topic
+Build filter_sales_data(rows, mode, reference_date)
+
+## Resume From
+Start with filter_sales_data() for:
+- prev_month
+- last_30_days
+Then test filtered rows before moving to revenue calculations.
