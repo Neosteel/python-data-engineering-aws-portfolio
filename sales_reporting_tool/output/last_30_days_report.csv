@@ -1,0 +1,7 @@
+order_id,customer,product,quantity,price,date
+2009,Eva,Laptop,1,1200.0,2026-03-01
+2010,Alice,Monitor,1,300.0,2026-03-05
+2011,David,Mouse,2,25.0,2026-03-10
+2012,Bob,Laptop,1,1200.0,2026-03-15
+2014,Eva,Mouse,1,25.0,2026-03-20
+2015,Alice,Laptop,1,1200.0,2026-03-22
