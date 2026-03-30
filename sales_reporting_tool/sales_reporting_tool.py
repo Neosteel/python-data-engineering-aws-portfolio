@@ -116,32 +116,35 @@ def write_report_to_csv(rows, output_file):
 
             writer.writerow(output_row)
 
+def get_output_file_name(mode):
+    if mode == "prev_month":
+        return "output/prev_month_report.csv"
+    elif mode == "last_30_days":
+        return "output/last_30_days_report.csv"
+
 
 sales_data = load_sales_data(input_file)
 clean_data, invalid_count = clean_sales_data(sales_data)
 
 reference_date = datetime(2026, 3, 31)
 
-prev_month_data = filter_sales_data(clean_data, "prev_month", reference_date)
-last_30_days_data = filter_sales_data(clean_data, "last_30_days", reference_date)
+mode = input("Enter mode (prev_month / last_30_days): ").strip()
 
-prev_month_revenue = calculate_total_revenue(prev_month_data)
-last_30_days_revenue = calculate_total_revenue(last_30_days_data)
+if mode not in ["prev_month", "last_30_days"]:
+    print("Invalid mode. Please enter 'prev_month' or 'last_30_days'.")
+else:
+    filtered_data = filter_sales_data(clean_data, mode, reference_date)
 
-prev_month_product_revenue = calculate_revenue_by_product(prev_month_data)
-last_30_days_product_revenue = calculate_revenue_by_product(last_30_days_data)
+    total_revenue = calculate_total_revenue(filtered_data)
+    product_revenue = calculate_revenue_by_product(filtered_data)
+    customer_revenue = calculate_revenue_by_customer(filtered_data)
 
-prev_month_customer_revenue = calculate_revenue_by_customer(prev_month_data)
-last_30_days_customer_revenue = calculate_revenue_by_customer(last_30_days_data)
+    output_file = get_output_file_name(mode)
+    write_report_to_csv(filtered_data, output_file)
 
-write_report_to_csv(prev_month_data, "output/prev_month_report.csv")
-write_report_to_csv(last_30_days_data, "output/last_30_days_report.csv")
-
-print("Invalid row count:", invalid_count)
-print("Previous month total revenue:", prev_month_revenue)
-print("Last 30 days total revenue:", last_30_days_revenue)
-print("Previous month revenue by product:", prev_month_product_revenue)
-print("Last 30 days revenue by product:", last_30_days_product_revenue)
-print("Previous month revenue by customer:", prev_month_customer_revenue)
-print("Last 30 days revenue by customer:", last_30_days_customer_revenue)
-print("Filtered reports written successfully.")
+    print("\nMode selected:", mode)
+    print("Invalid row count:", invalid_count)
+    print("Total revenue:", total_revenue)
+    print("Revenue by product:", product_revenue)
+    print("Revenue by customer:", customer_revenue)
+    print("Report written to:", output_file)

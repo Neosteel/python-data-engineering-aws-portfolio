@@ -468,3 +468,39 @@ Decide next improvement:
 - option 2: refactor into class-based version for learning OOP
 - option 3: push current version to GitHub first
 
+## Latest Session
+- Completed full sales reporting pipeline (load → clean → filter → aggregate → write CSV)
+- Refactored code to clean structure (functions on top, execution at bottom)
+- Removed noisy debug prints and kept only summary output
+- Added revenue by product and revenue by customer
+- Successfully wrote output CSV reports
+- Pushed project to GitHub
+- Started implementing user input mode selection (next step)
+
+## Current File
+sales_reporting_tool/sales_reporting_tool.py
+
+## Next Topic
+Add user input mode selection and run pipeline dynamically
+
+## Resume From
+Implement input-based mode selection and validate mode before processing
+
+## Latest Session
+- Added user input mode selection using input()
+- Script now supports running one mode at a time
+- Added mode validation for:
+  - prev_month
+  - last_30_days
+- Added helper logic to choose correct output file name by mode
+- Confirmed both interactive modes work correctly
+- Script now behaves like a small CLI-style reporting tool
+
+## Current File
+sales_reporting_tool/sales_reporting_tool.py
+
+## Next Topic
+Convert the sales reporting tool into a class-based version (OOP)
+
+## Resume From
+Refactor the current working function-based script into a class with __init__ and methods.
