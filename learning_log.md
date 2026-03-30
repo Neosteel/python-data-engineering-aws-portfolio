@@ -442,3 +442,29 @@ Start with filter_sales_data() for:
 - prev_month
 - last_30_days
 Then test filtered rows before moving to revenue calculations.
+
+## Latest Session
+- Refactored sales_reporting_tool.py into a cleaner structure
+- Kept all function definitions at the top
+- Kept execution logic at the bottom
+- Removed noisy row-by-row debug printing
+- Renamed unclear variable names for cleaner readability
+- Confirmed final summary output:
+  - Invalid row count = 2
+  - Previous month total revenue = 1900.0
+  - Last 30 days total revenue = 3975.0
+- Confirmed revenue by product and revenue by customer outputs are correct
+- Confirmed output/prev_month_report.csv and output/last_30_days_report.csv are written correctly
+
+## Current File
+sales_reporting_tool/sales_reporting_tool.py
+
+## Next Topic
+Add simple user mode selection or refactor further for portfolio quality
+
+## Resume From
+Decide next improvement:
+- option 1: add user input for mode selection
+- option 2: refactor into class-based version for learning OOP
+- option 3: push current version to GitHub first
+
