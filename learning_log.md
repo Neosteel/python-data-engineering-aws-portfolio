@@ -504,3 +504,25 @@ Convert the sales reporting tool into a class-based version (OOP)
 
 ## Resume From
 Refactor the current working function-based script into a class with __init__ and methods.
+
+## Latest Session
+- Refactored sales_reporting_tool.py into a class-based version
+- Created SalesReportingTool class
+- Learned how __init__ stores shared values like:
+  - input_file
+  - reference_date
+- Converted functions into class methods using self
+- Added run() method to control the full pipeline
+- Verified OOP version works for:
+  - prev_month
+  - last_30_days
+- Confirmed outputs are still correct in class-based design
+
+## Current File
+sales_reporting_tool/sales_reporting_tool.py
+
+## Next Topic
+Understand class version deeply and compare function-based vs OOP design
+
+## Resume From
+Review how self, __init__, and method calls map to the earlier function-based version.
