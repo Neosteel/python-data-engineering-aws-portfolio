@@ -526,3 +526,26 @@ Understand class version deeply and compare function-based vs OOP design
 
 ## Resume From
 Review how self, __init__, and method calls map to the earlier function-based version.
+
+## Latest Session
+- Fixed class indentation issues and restored working OOP version
+- Refactored prev_month logic to be dynamic based on reference_date
+- Verified dynamic prev_month still returns 1900.0
+- Verified last_30_days still returns 3975.0
+- Better understood:
+  - self = object itself
+  - __init__ = constructor
+  - fixed values go into self
+  - changing values stay as method parameters
+
+## Current File
+sales_reporting_tool/sales_reporting_tool.py
+
+## Next Topic
+Review OOP understanding and optionally clean/refactor further
+
+## Resume From
+Decide whether to:
+- commit/push dynamic prev_month improvement
+- review class version again
+- start next mini project

@@ -44,8 +44,15 @@ class SalesReportingTool:
         filtered_rows = []
 
         if mode == "prev_month":
+            previous_month = self.reference_date.month - 1
+            previous_year = self.reference_date.year
+
+            if previous_month == 0:
+                previous_month = 12
+                previous_year -= 1
+
             for row in rows:
-                if row["date"].year == 2026 and row["date"].month == 2:
+                if row["date"].year == previous_year and row["date"].month == previous_month:
                     filtered_rows.append(row)
 
         elif mode == "last_30_days":
